@@ -17,7 +17,7 @@ import org.testng.annotations.Listeners;
                 "timeline:test-output-thread/"
         }, monochrome = true,
         dryRun = false,
-        tags = "@otp"
+        tags = "@WebApp"
 )
 
 @Listeners({ExtentITestListenerClassAdapter.class})

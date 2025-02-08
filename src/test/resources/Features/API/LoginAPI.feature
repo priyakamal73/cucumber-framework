@@ -1,4 +1,4 @@
-@API @login
+@API
 Feature: Login
 
   Scenario: Login with valid and existing user credentials
