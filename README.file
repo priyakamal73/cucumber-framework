@@ -1,64 +1,86 @@
-//chrome driver downloads - https://googlechromelabs.github.io/chrome-for-testing/
+# Selenium Java - Cucumber Framework
 
-//8 locators in selenium - id, class, name, tag name, link text, partial link text, css selector, xpath
+## Overview
+This is a BDD automation framework using **Selenium, Cucumber** for testing **Web, Mobile, and API applications**. It integrates **Appium for mobile automation** and **RestAssured for API automation** to provide a unified testing solution. Currently the site used for webapp and API testing is `Expand Testing - Practice Testing Site` and the app for mobile app testing is `ApiDemos-debug.apk`
 
-//Object initialization always happens via constructor
+## Features
+- Supports **Web, Mobile, and API** automation
+- BDD framework using **Cucumber**
+- Uses **Selenium WebDriver** for web automation
+- Uses **Appium** for mobile automation
+- Uses **RestAssured** for API testing
+- Generates **Extent Report with Screenshots for failed cases**
+- **Page Object Model (POM)** for maintainability
+- **Hooks and Tags** for better test management
+- **Cross-browser and cross-platform testing**
 
-//New keyword will help me create new object in the memory
+## Tech Stack
+- **Language**: Java
+- **Web Automation**: Selenium WebDriver
+- **Mobile Automation**: Appium
+- **API Automation**: RestAssured
+- **Test Runner**: Cucumber
+- **Build Tool**: Maven
+- **Reporting**: Extent Reports, Default Cucumber HTML Reports
 
-//Call methods from Page class by creating object for that class
+## Project Structure
+```
+PracticeTestingSite/
+│-- .idea/                         # IDE settings
+│-- src/
+│   │-- main/
+│   │   │-- java/
+│   │   │   │-- API/               # API POJO Classes
+│   │   │   │-- MobileAppPages/    # Mobile app Page Objects
+│   │   │   │-- WebAppPages/       # Web app Page Objects
+│   │   │-- resources/
+│   │   │   │-- config/            # Configuration file
+│   │-- test/
+│   │   │-- java/
+│   │   │   │-- Hooks/             # Cucumber hooks
+│   │   │   │-- Runner/            # Test runner file
+│   │   │   │-- StepDefinitions/
+│   │   │   │   │-- API/           # API step definitions
+│   │   │   │   │-- MobileApp/     # Mobile step definitions
+│   │   │   │   │-- WebApp/        # Web step definitions
+│   │   │-- resources/
+│   │   │   │-- Features/
+│   │   │   │   │-- API/           # API feature files
+│   │   │   │   │-- MobileApp/     # Mobile feature files
+│   │   │   │   │-- WebApp/        # Web feature files
+│   │   │   │-- extent.properties  # Extent report properties
+│   │   │   │-- extent-config.xml  # Extent report config
+│-- target/                        # Compiled output
+│-- test-output/                   # Test reports
+│-- test-output-thread/            # Threaded test reports
+│-- .gitignore                     # Git ignore file
+│-- ApiDemos-debug.apk             # Sample apk file for mobile app testing
+│-- chromedriver.exe               # Chrome driver executable file
+│-- pom.xml                        # pom file with dependencies
+│-- README.file                    # README file
 
-//When a class has static methods, no need to create objects for that class. Use classname and dot operator
+```
 
-//How to handle iframe
-public void dismissGoogleAd() {
-        try {
-            if (iframe.isDisplayed()) {
-                driver.switchTo().frame(iframe);
-                if (adDismissButton.isDisplayed()) {
-                    adDismissButton.click();
-                }
-                driver.switchTo().defaultContent();
-            }
-        } catch (NoSuchElementException e) {
-            System.out.println("Ad or dismiss button not found. Continuing with the script");
-        }
-    }
+## Configuration
+- **Web App**: Update `config.properties` with browser settings.
+- **Mobile App**: Set desired capabilities in `Hooks.java` class.
+- **API Testing**: Configure base URLs, authToken and other fields in `config.properties`.
+- **Extent Report**: Update `extent.properties` and `extent-config.xml` for extent report configurations.
 
-//How to handle date picker
-1. Use send keys to send date
-2. Right click, use selector's hub to inspect the date picker and obtain the locator and choose the dates
-3. Use the developer console's debugger to stop the freeze the element and take the locator
-4. Use ctrl+shift+P to focus on the element and take the locator
-5. Use selector hub's debugger to stop and take the locator
-6. Use the event listener in the developer console i.e, sources > Event listener (on right end), choose mouse option and continue
+## Running Tests
+### 1. Web Automation
+```sh
+mvn test -Dcucumber.filter.tags="@WebApp"
+```
+### 2. Mobile Automation
+```sh
+mvn test -Dcucumber.filter.tags="@MobileApp"
+```
+### 3. API Testing
+```sh
+mvn test -Dcucumber.filter.tags="@API"
+```
 
-//How to reverse a string using string builder class
-String reversedDate = new StringBuilder(date).reverse().toString();
-
-//How to convert the date format from DD-MM-YYYY to YYYY-MM-DD
-SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
-Date newDate = inputFormat.parse(date);
-
-SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-String formattedDate = outputFormat.format(newDate);
-
-//prop.setProperty will only store the value in the memory. To store the value in the actual file do the below
-FileOutputStream fos = new FileOutputStream(Hooks.getPropertiesFilePath());
-prop.store(fos, "Updated with auth token");
-
-//How does the git store your files?
-In the form of snapshots - format is snapshot
-
-//Git Commands
-git init - create working repository in your current working directory/ initialize empty repository
-git add - add specific file to stage area
-git commit - pass file from stage area to local repository
-git push -u origin - u stands for upstream - push files from local repo to remote repo
-
-//Initial git one time setup for this project
-git config --global user.name "Sanmukapriya"
-git config --global user.email "priyakamal5391@gmail.com"
-git init
-
-//If any file is not committed the status of the file will be untracked
+## Reports
+- **Extent Report**: `test-output/SparkReport/ExtentReport.html`
+- **Cucumber HTML Report**: `target/cucumber-reports/index.html`
