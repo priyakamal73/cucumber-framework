@@ -1,0 +1,64 @@
+//chrome driver downloads - https://googlechromelabs.github.io/chrome-for-testing/
+
+//8 locators in selenium - id, class, name, tag name, link text, partial link text, css selector, xpath
+
+//Object initialization always happens via constructor
+
+//New keyword will help me create new object in the memory
+
+//Call methods from Page class by creating object for that class
+
+//When a class has static methods, no need to create objects for that class. Use classname and dot operator
+
+//How to handle iframe
+public void dismissGoogleAd() {
+        try {
+            if (iframe.isDisplayed()) {
+                driver.switchTo().frame(iframe);
+                if (adDismissButton.isDisplayed()) {
+                    adDismissButton.click();
+                }
+                driver.switchTo().defaultContent();
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Ad or dismiss button not found. Continuing with the script");
+        }
+    }
+
+//How to handle date picker
+1. Use send keys to send date
+2. Right click, use selector's hub to inspect the date picker and obtain the locator and choose the dates
+3. Use the developer console's debugger to stop the freeze the element and take the locator
+4. Use ctrl+shift+P to focus on the element and take the locator
+5. Use selector hub's debugger to stop and take the locator
+6. Use the event listener in the developer console i.e, sources > Event listener (on right end), choose mouse option and continue
+
+//How to reverse a string using string builder class
+String reversedDate = new StringBuilder(date).reverse().toString();
+
+//How to convert the date format from DD-MM-YYYY to YYYY-MM-DD
+SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+Date newDate = inputFormat.parse(date);
+
+SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+String formattedDate = outputFormat.format(newDate);
+
+//prop.setProperty will only store the value in the memory. To store the value in the actual file do the below
+FileOutputStream fos = new FileOutputStream(Hooks.getPropertiesFilePath());
+prop.store(fos, "Updated with auth token");
+
+//How does the git store your files?
+In the form of snapshots - format is snapshot
+
+//Git Commands
+git init - create working repository in your current working directory/ initialize empty repository
+git add - add specific file to stage area
+git commit - pass file from stage area to local repository
+git push -u origin - u stands for upstream - push files from local repo to remote repo
+
+//Initial git one time setup for this project
+git config --global user.name "Sanmukapriya"
+git config --global user.email "priyakamal5391@gmail.com"
+git init
+
+//If any file is not committed the status of the file will be untracked
