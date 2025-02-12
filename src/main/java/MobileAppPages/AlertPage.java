@@ -17,7 +17,7 @@ public class AlertPage {
     }
 
     @AndroidFindBy(accessibility = "App")
-    private WebElement appButton;
+    private WebElement appPage;
 
     @AndroidFindBy(accessibility = "Alert Dialogs")
     private WebElement alertDialogsButton;
@@ -51,7 +51,7 @@ public class AlertPage {
 
 
     public void navigateToAlertPage(){
-        appButton.click();
+        appPage.click();
         alertDialogsButton.click();
         try {
             Thread.sleep(2000);
