@@ -6,7 +6,7 @@ import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 
-public class AppiumGestures {
+public class AppiumGesturesStepDefs {
 
     GesturesPage gesturesPage = new GesturesPage(Hooks.getAndroidDriver());
 
