@@ -1,4 +1,4 @@
-@MobileApp @ges
+@MobileApp
 Feature: Appium Gestures
 
   Scenario: Perform click, long click and drag and drop gestures in appium

@@ -4,7 +4,7 @@ import Hooks.Hooks;
 import MobileAppPages.AlertPage;
 import io.cucumber.java.en.*;
 
-public class AppiumAlertsStepDefs {
+public class AlertsStepDefs {
 
     AlertPage alertPage = new AlertPage(Hooks.getAndroidDriver());
 
