@@ -1,7 +1,7 @@
 # Selenium Java - Cucumber Framework
 
 ## Overview
-This is a BDD automation framework using **Selenium, Cucumber** for testing **Web, Mobile, and API applications**. It integrates **Appium for mobile automation** and **RestAssured for API automation** to provide a unified testing solution. Currently the site used for webapp and API testing is `Expand Testing - Practice Testing Site` and the app for mobile app testing is `ApiDemos-debug.apk`
+This is a BDD automation framework using **Selenium - Cucumber** for testing **Web, Mobile, and API applications**. It integrates **Appium for mobile automation** and **RestAssured for API automation** to provide a unified testing solution with **Extent Report**. Currently the site used for webapp and API testing is `Expand Testing - Practice Testing Site` and the app for mobile app testing is `ApiDemos-debug.apk`
 
 ## Features
 - Supports **Web, Mobile, and API** automation
