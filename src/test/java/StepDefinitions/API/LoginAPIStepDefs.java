@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Properties;
 
 import static io.restassured.RestAssured.given;
+import static io.restassured.RestAssured.proxy;
 
 public class LoginAPIStepDefs {
     private Properties prop;
@@ -28,7 +29,15 @@ public class LoginAPIStepDefs {
     public void i_make_a_post_request_to_login_endpoint_with_existing_user_credentials() {
 
         String email = prop.getProperty("api.email");
-        String password = prop.getProperty("api.password");
+        String password;
+
+        if (prop.getProperty("api.newPassword") == null || prop.getProperty("api.newPassword").isEmpty()){
+            password = prop.getProperty("api.password");
+        }
+        else{
+            password = prop.getProperty("api.newPassword");
+        }
+
 
         loginDetails.setEmail(email);
         loginDetails.setPassword(password);
@@ -57,7 +66,7 @@ public class LoginAPIStepDefs {
     public void theTokenMustBeStoredSuccessfully() throws IOException {
         String authToken = response.jsonPath().getString("data.token");
         prop.setProperty("api.authToken",authToken);
-        FileOutputStream fos = new FileOutputStream(Hooks.getPropertiesFilePath());
+        FileOutputStream fos = new FileOutputStream(String.valueOf(Hooks.getPropertiesFilePath()));
         prop.store(fos, "Updated with auth token");
     }
 }

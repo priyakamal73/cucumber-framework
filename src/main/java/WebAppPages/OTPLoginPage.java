@@ -35,13 +35,13 @@ public class OTPLoginPage {
     @FindBy(id = "otp-message")
     private WebElement otpMessage;
 
-    @FindBy(xpath = "//*[@id=\"__layout\"]/div/header/div[3]/button[1]")
+    @FindBy(xpath = "//button[@data-original-title='Copy email']")
     private WebElement tempMailCopyButton;
 
     @FindBy(xpath = "//span[@title='Your OTP Code']")
     private WebElement tempMail;
 
-    @FindBy(xpath = "//*[@id=\"__layout\"]/div/main/div/article/div/div[3]/span")
+    @FindBy(xpath = "//div[@class='with-plain-text message__content']//span")
     private WebElement tempMailText;
 
     @FindBy(id = "otp")
@@ -71,7 +71,7 @@ public class OTPLoginPage {
             }
         }
         try {
-            Thread.sleep(10000);
+            Thread.sleep(6000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -113,7 +113,7 @@ public class OTPLoginPage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, 400)");
         try {
-            Thread.sleep(3000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -190,6 +190,11 @@ public class OTPLoginPage {
     public void logout() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, 100)");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         logoutButton.click();
     }
 }

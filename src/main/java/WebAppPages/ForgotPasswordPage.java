@@ -19,12 +19,6 @@ public class ForgotPasswordPage {
     @FindBy(xpath = "//*[@id=\"examples\"]/div[1]/div[4]/div/div/h3/a")
     private WebElement forgotPasswordPageButton;
 
-    @FindBy(id = "aswift_9")
-    private WebElement iframe;
-
-    @FindBy(xpath = "//*[@id=\"dismiss-button\"]")
-    private WebElement adDismissButton;
-
     @FindBy(id = "email")
     private WebElement emailField;
 
@@ -46,20 +40,13 @@ public class ForgotPasswordPage {
 
     public void clickForgotPasswordPageButton() {
         forgotPasswordPageButton.click();
-    }
-
-    public void dismissTheGoogleAd() {
-        try {
-            if (iframe.isDisplayed()) {
-                driver.switchTo().frame(iframe);
-                adDismissButton.isDisplayed();
-                adDismissButton.click();
-                driver.switchTo().defaultContent();
-            }
-        } catch (NoSuchElementException e) {
-            System.out.println("Google ad not found. Continuing with the script");
+        if (!driver.getCurrentUrl().contains("forgot-password")) {
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+            forgotPasswordPageButton.click();
         }
     }
+
 
     public void enterEmailAddress(String email) {
         JavascriptExecutor js = (JavascriptExecutor) driver;

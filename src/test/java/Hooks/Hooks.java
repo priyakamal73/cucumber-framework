@@ -22,34 +22,21 @@ import java.util.Properties;
 
 public class Hooks {
 
-    @Getter
     protected static WebDriver driver;
-
-    @Getter
     protected static AndroidDriver androidDriver;
-
-    @Getter
     protected static String baseUrl;
-
-    @Getter
     protected static String authToken;
-
-    private static final Properties prop;
-
-    @Getter
+    private static Properties prop;
     private static final String propertiesFilePath = "C:\\Users\\SANMUKA PRIYA\\eclipse-workspace\\Practice Testing Site\\src\\resources\\config\\config.properties";
 
-    // Load properties in a static block
-    static {
+
+    public static Properties getProperties() {
         prop = new Properties();
         try (InputStream input = Files.newInputStream(Paths.get(propertiesFilePath))) {
             prop.load(input);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public static Properties getProperties() {
         return prop;
     }
 
@@ -93,6 +80,20 @@ public class Hooks {
                 throw new RuntimeException("Appium driver initialization failed: " + e.getMessage());
             }
         }
+    }
+
+    public static WebDriver getDriver(){return driver;}
+
+    public static String getAuthToken() {
+        return authToken;
+    }
+
+    public static AndroidDriver getAndroidDriver(){
+        return androidDriver;
+    }
+
+    public static String getPropertiesFilePath(){
+        return propertiesFilePath;
     }
 
     @After

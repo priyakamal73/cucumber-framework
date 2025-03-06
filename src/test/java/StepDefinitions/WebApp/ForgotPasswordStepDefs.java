@@ -14,7 +14,6 @@ public class ForgotPasswordStepDefs {
     public void i_am_on_the_forgot_password_screen() {
         forgotPasswordPage.scrollPage();
         forgotPasswordPage.clickForgotPasswordPageButton();
-        forgotPasswordPage.dismissTheGoogleAd();
     }
 
     @When("I enter a valid {string}")
