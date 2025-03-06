@@ -1,4 +1,4 @@
-@API @logout
+@API
 Feature: Logout
 
   Scenario: Logout using existing valid credentials
