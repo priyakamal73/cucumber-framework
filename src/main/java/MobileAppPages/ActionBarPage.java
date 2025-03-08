@@ -28,7 +28,7 @@ public class ActionBarPage {
     @AndroidFindBy(accessibility = "DISPLAY_HOME_AS_UP")
     private WebElement displayHomeAsUpButton;
 
-    @AndroidFindBy(accessibility = "Navigate up")
+    @AndroidFindBy(accessibility = "Navigated up")
     private WebElement backButton;
 
     public void navigateToDisplayOptionsPage() {
