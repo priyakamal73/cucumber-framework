@@ -1,12 +1,17 @@
 pipeline {
     agent any
 
+    environment {
+        PATH = "${env.JAVA_HOME}\\bin;${env.MAVEN_HOME}\\bin;C:\\Ruby33-x64\\bin;${env.PATH}"
+    }
+
     stages {
         stage('Check Tools') {
             steps {
                 bat 'java -version'
                 bat 'mvn --version'
                 bat 'git --version'
+                bat 'gem --version'
                 bat 'cucumber --version'
             }
         }
@@ -29,6 +34,7 @@ pipeline {
                 bat 'echo Setting up environment...'
                 bat 'java -version'
                 bat 'mvn --version'
+                bat 'gem --version'
                 bat 'cucumber --version'
             }
         }
