@@ -1,0 +1,151 @@
+//chrome driver downloads - https://googlechromelabs.github.io/chrome-for-testing/
+
+//8 locators in selenium - id, class, name, tag name, link text, partial link text, css selector, xpath
+
+//Object initialization always happens via constructor
+
+//New keyword will help me create new object in the memory
+
+//Call methods from Page class by creating object for that class
+
+//When a class has static methods, no need to create objects for that class. Use classname and dot operator
+
+//How to handle iframe - type 1
+public void dismissGoogleAd() {
+        try {
+            if (iframe.isDisplayed()) {
+                driver.switchTo().frame(iframe);
+                if (adDismissButton.isDisplayed()) {
+                    adDismissButton.click();
+                }
+                driver.switchTo().defaultContent();
+            }
+        } catch (NoSuchElementException e) {
+            System.out.println("Ad or dismiss button not found. Continuing with the script");
+        }
+    }
+
+//How to handle iframe - type 2 - removes add dynamically
+js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+
+
+//How to handle date picker
+1. Use send keys to send the date
+2. Right click, use selector's hub to inspect the date picker and obtain the locator and choose the dates
+3. Use the developer console's debugger to stop the freeze the element and take the locator
+4. Use ctrl+shift+P to focus on the element and take the locator
+5. Use selector hub's debugger to stop and take the locator
+6. Use the event listener in the developer console i.e, sources > Event listener (on right end), choose mouse option and continue
+
+//How to reverse a string using string builder class
+String reversedDate = new StringBuilder(date).reverse().toString();
+
+//How to convert the date format from DD-MM-YYYY to YYYY-MM-DD
+SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+Date newDate = inputFormat.parse(date);
+
+SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+String formattedDate = outputFormat.format(newDate);
+
+//break each character in a string
+
+Method 1:
+String username = "admin";
+char[] chars = username.toCharArray();
+
+Method 2:
+String str = "admin";
+
+for (int i = 0; i < str.length(); i++) {
+    char c = str.charAt(i);
+    System.out.println(c);
+}
+
+//how to type the user given char by its code (basic auth feature)
+for (char c : password.toCharArray()) {
+                int keyCode = KeyEvent.getExtendedKeyCodeForChar(Character.toUpperCase(c));
+                if (keyCode != KeyEvent.VK_UNDEFINED) {
+                    robot.keyPress(keyCode);
+                    robot.keyRelease(keyCode);
+                }
+            }
+
+//prop.setProperty will only store the value in the memory. To store the value in the actual file do the below
+FileOutputStream fos = new FileOutputStream(Hooks.getPropertiesFilePath());
+prop.store(fos, "Updated with auth token");
+
+//To return list of webElements, you can use this method
+@FindBy(xpath = "//table[@class='table table-striped']/thead/tr/th")
+private List<WebElement> tableHeaders;
+
+//To get the text of the first locator in the list one after other
+for (int i = 0; i < headers.size(); i++) {
+  String headerText = headers.get(i).getText();
+ }
+
+//Customize the locator
+driver.findElement(By.xpath("//table//tr[" + (rowIndex + 1) + "]/td[" + (headerIndex + 1) + "]")).getText();
+
+//How does the git store your files?
+In the form of snapshots - format is snapshot
+SCM means Software Configuration Management
+
+//how to assert if an element is not displayed in the DOM
+public boolean isBackButtonHidden(){
+        try{
+            return backButton.isDisplayed();
+        }catch (NoSuchElementException | StaleElementReferenceException e) {
+            return false;
+        }
+    }
+
+//Git Commands
+git init -> create working repository in your current working directory/ initialize empty repository
+git add -> add specific file to stage area
+git remote add origin <remoteRepoSSHPath> - Connect to your remote repo
+git commit -> pass file from stage area to local repository
+git commit - m "Commit message" -> pass file from stage area to local repository with commit message
+git push -u origin -> u stands for upstream - push files from local repo to remote repo
+git branch -> display all available branch
+git branch <branchName> -> create a new branch
+git switch <branchName> -> switch to the specified branch
+git status -> display the status of the files
+git merge -m "Merge message" <branchName> -> The <branchName> must be the from which the changes needs to be pushed
+git pull - pulls the latest code from remote repo's master to our local repo
+git clone <remoteRepoSSHPath> - clone a remote repo
+rmdir /s /q .git - remove the git folder for the project
+
+
+
+//Initial git one time setup for this project
+git config --global user.name "Sanmukapriya"
+git config --global user.email "priyakamal5391@gmail.com"
+git init
+
+//If any file is not committed the status of the file will be untracked
+//If the files are untracked, it means the file is still in the working area
+
+
+//Jenkins Notes
+Jenkins is an open source automation server
+Jenkins is based on Java
+It supports JDK 11, 17 or 21
+It follows master-slave architecture
+Jenkins setup is by default setup on port no 8080
+Any task performed in jenkins is called a `job`
+Weather Report in Jenkins - build stability is observed in this report
+
+//Jenkins commands
+java -jar jenkins.war -> To start the jenkins server. open the cmd prompt in `D:\Jenkins` and type this command
+
+
+DevOps  Delivery pipeline - Version control > Build > unit test > deploy > auto test > deploy to prod > measure and validate
+
+clean > build > deploy > QA > Release
+
+
+//Command to start ngrok and generate public jenkins url
+ngrok http 8080
+
+After running and obtaining the public url, copy the url until `free.app`
+and while pasting it in the webhooks of the github repo, add `/github-webhook/` after `free.app`
