@@ -12,6 +12,7 @@ pipeline {
             steps {
                 bat 'echo Setting up environment...'
                 bat 'mvn --version'  // Check if Maven is installed
+                bat 'java -version' // Check if Java is installed
             }
         }
 
@@ -23,7 +24,13 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                bat 'mvn test'
+                bat 'mvn test' // Run tests
+            }
+            post {
+                always {
+                    junit '**/target/surefire-reports/*.xml' 
+                    cucumber '**/target/cucumber-reports/*.json' 
+                }
             }
         }
 
@@ -37,12 +44,8 @@ pipeline {
     post {
         always {
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true 
+            archiveArtifacts artifacts: '**/target/cucumber-reports/*.json', fingerprint: true 
         }
         success {
-            echo 'Build and Tests completed successfully!'
-        }
-        failure {
-            echo 'Build or Tests failed!'
-        }
-    }
-}
+            echo 'Build and Tests completed
