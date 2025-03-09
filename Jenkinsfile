@@ -6,6 +6,7 @@ pipeline {
     }
 
     stages {
+        // Stage 1: Check Tools
         stage('Check Tools') {
             steps {
                 bat 'java -version'
@@ -16,12 +17,7 @@ pipeline {
             }
         }
 
-        stage('Check Git Access') {
-            steps {
-                bat 'git --version'
-            }
-        }
-
+        // Stage 2: Checkout Code
         stage('Checkout Code') {
             steps {
                 script {
@@ -35,6 +31,7 @@ pipeline {
             }
         }
 
+        // Stage 3: Build Project
         stage('Build Project') {
             steps {
                 script {
@@ -48,8 +45,10 @@ pipeline {
             }
         }
 
+        // Stage 4: Run Tests in Parallel
         stage('Run Tests') {
             parallel {
+                // Web App Tests
                 stage('Run Web App Tests') {
                     steps {
                         script {
@@ -68,6 +67,8 @@ pipeline {
                         }
                     }
                 }
+
+                // Mobile App Tests
                 stage('Run Mobile App Tests') {
                     steps {
                         script {
@@ -86,6 +87,8 @@ pipeline {
                         }
                     }
                 }
+
+                // API Tests
                 stage('Run API Tests') {
                     steps {
                         script {
@@ -107,6 +110,7 @@ pipeline {
             }
         }
 
+        // Stage 5: Generate Reports
         stage('Generate Reports') {
             steps {
                 bat 'echo Generating reports...'
@@ -116,6 +120,7 @@ pipeline {
 
     post {
         always {
+            // Archive artifacts
             archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
             archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
             archiveArtifacts artifacts: '**/target/cucumber-reports/*.json', fingerprint: true
