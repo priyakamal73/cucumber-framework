@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         PATH = "${env.JAVA_HOME}\\bin;${env.MAVEN_HOME}\\bin;C:\\Ruby33-x64\\bin;${env.PATH}"
-        GEM_PATH = "C:/Users/SANMUKA PRIYA/.local/share/gem/ruby/3.3.0;C:/Ruby33-x64/lib/ruby/gems/3.3.0"
+        //GEM_PATH = "C:/Users/SANMUKA PRIYA/.local/share/gem/ruby/3.3.0;C:/Ruby33-x64/lib/ruby/gems/3.3.0"
     }
 
     stages {
