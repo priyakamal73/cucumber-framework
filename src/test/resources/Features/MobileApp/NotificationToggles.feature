@@ -1,4 +1,4 @@
-@MobileApp @toggle
+@MobileApp
 Feature: Notification toggles
 
   As a user, I want to toggle on/off my airplane settings

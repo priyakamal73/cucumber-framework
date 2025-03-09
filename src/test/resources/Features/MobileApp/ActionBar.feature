@@ -1,4 +1,4 @@
-@MobileApp @action
+@MobileApp
 Feature: Action Bars
 
   As a user, I would like to customize my action bar display options
