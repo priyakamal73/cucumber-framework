@@ -3,7 +3,6 @@ pipeline {
 
     environment {
         PATH = "${env.JAVA_HOME}\\bin;${env.MAVEN_HOME}\\bin;C:\\Ruby33-x64\\bin;${env.PATH}"
-        //GEM_PATH = "C:/Users/SANMUKA PRIYA/.local/share/gem/ruby/3.3.0;C:/Ruby33-x64/lib/ruby/gems/3.3.0"
     }
 
     stages {
@@ -20,37 +19,47 @@ pipeline {
         stage('Check Git Access') {
             steps {
                 bat 'git --version'
-                bat 'git init'
             }
         }
 
         stage('Checkout Code') {
             steps {
-                git branch: 'main', url: 'https://github.com/priyakamal73/cucumber-framework.git'
-            }
-        }
-
-        stage('Setup Environment') {
-            steps {
-                bat 'echo Setting up environment...'
-                bat 'java -version'
-                bat 'mvn --version'
-                bat 'gem --version'
-                bat 'cucumber --version'
+                script {
+                    try {
+                        git branch: 'main', url: 'https://github.com/priyakamal73/cucumber-framework.git'
+                    } catch (Exception e) {
+                        echo "Error during checkout: ${e}"
+                        throw e
+                    }
+                }
             }
         }
 
         stage('Build Project') {
             steps {
-                bat 'mvn clean install'
+                script {
+                    try {
+                        bat 'mvn clean install'
+                    } catch (Exception e) {
+                        echo "Error during build: ${e}"
+                        throw e
+                    }
+                }
             }
         }
 
-        stage('Run Tests in Parallel') {
+        stage('Run Tests') {
             parallel {
                 stage('Run Web App Tests') {
                     steps {
-                        bat 'cucumber -t @WebApp'
+                        script {
+                            try {
+                                bat 'cucumber -t @WebApp'
+                            } catch (Exception e) {
+                                echo "Error during Web App tests: ${e}"
+                                throw e
+                            }
+                        }
                     }
                     post {
                         always {
@@ -61,7 +70,14 @@ pipeline {
                 }
                 stage('Run Mobile App Tests') {
                     steps {
-                        bat 'cucumber -t @MobileApp'
+                        script {
+                            try {
+                                bat 'cucumber -t @MobileApp'
+                            } catch (Exception e) {
+                                echo "Error during Mobile App tests: ${e}"
+                                throw e
+                            }
+                        }
                     }
                     post {
                         always {
@@ -72,7 +88,14 @@ pipeline {
                 }
                 stage('Run API Tests') {
                     steps {
-                        bat 'cucumber -t @API'
+                        script {
+                            try {
+                                bat 'cucumber -t @API'
+                            } catch (Exception e) {
+                                echo "Error during API tests: ${e}"
+                                throw e
+                            }
+                        }
                     }
                     post {
                         always {
