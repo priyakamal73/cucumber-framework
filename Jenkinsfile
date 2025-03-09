@@ -11,25 +11,52 @@ pipeline {
         stage('Setup Environment') {
             steps {
                 bat 'echo Setting up environment...'
-                bat 'mvn --version'  // Check if Maven is installed
-                bat 'java -version' // Check if Java is installed
+                bat 'java -version'
+                bat 'mvn --version' 
+                bat 'cucumber --version' 
             }
         }
 
         stage('Build Project') {
             steps {
-                bat 'mvn clean install'
+                bat 'mvn clean install' 
             }
         }
 
-        stage('Run Tests') {
-            steps {
-                bat 'mvn test' // Run tests
-            }
-            post {
-                always {
-                    junit '**/target/surefire-reports/*.xml' 
-                    cucumber '**/target/cucumber-reports/*.json' 
+        stage('Run Tests in Parallel') {
+            parallel {
+                stage('Run Web App Tests') {
+                    steps {
+                        bat 'cucumber -t @WebApp' 
+                    }
+                    post {
+                        always {
+                            junit '**/target/surefire-reports/*.xml' 
+                            cucumber '**/target/cucumber-reports/*.json' 
+                        }
+                    }
+                }
+                stage('Run Mobile App Tests') {
+                    steps {
+                        bat 'cucumber -t @MobileApp' 
+                    }
+                    post {
+                        always {
+                            junit '**/target/surefire-reports/*.xml' 
+                            cucumber '**/target/cucumber-reports/*.json' 
+                        }
+                    }
+                }
+                stage('Run API Tests') {
+                    steps {
+                        bat 'cucumber -t @API' 
+                    }
+                    post {
+                        always {
+                            junit '**/target/surefire-reports/*.xml' 
+                            cucumber '**/target/cucumber-reports/*.json' 
+                        }
+                    }
                 }
             }
         }
@@ -43,9 +70,15 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
             archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true 
             archiveArtifacts artifacts: '**/target/cucumber-reports/*.json', fingerprint: true 
         }
         success {
-            echo 'Build and Tests completed
+            echo 'Build and Tests completed successfully!'
+        }
+        failure {
+            echo 'Build or Tests failed!'
+        }
+    }
+}
