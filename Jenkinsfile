@@ -4,6 +4,12 @@ pipeline {
     stages {
 
         stage('Check Tools') {
+            stage('Check Git Access') {
+            steps {
+                bat 'git --version'
+                bat 'git init'
+            }
+        }
             steps {
                 bat 'java -version'
                 bat 'mvn --version'
