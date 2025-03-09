@@ -15,9 +15,9 @@ Feature: User Registration
 
     Examples:
       | username  | password      | confirm password |
-      | Mahaut    | mahaut!123    | mahaut!123       |
+      | Mahautt   | mahautt!123   | mahautt!123      |
       | Guillaume | guillaume!123 | guillaume!123    |
-      | Renaud    | renaud!123    | renaud!123       |
+      | Renaude   | renaude!123   | renaude!123      |
 
   Scenario Outline: Invalid user registration with existing users
     Given I am on the registration page
