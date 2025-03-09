@@ -2,6 +2,15 @@ pipeline {
     agent any
 
     stages {
+
+        stage('Check Tools') {
+            steps {
+                bat 'java -version'
+                bat 'mvn --version'
+                bat 'git --version'
+                bat 'cucumber --version'
+            }
+        }
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/priyakamal73/cucumber-framework.git'
