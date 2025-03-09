@@ -2,14 +2,7 @@ pipeline {
     agent any
 
     stages {
-
         stage('Check Tools') {
-            stage('Check Git Access') {
-            steps {
-                bat 'git --version'
-                bat 'git init'
-            }
-        }
             steps {
                 bat 'java -version'
                 bat 'mvn --version'
@@ -17,6 +10,14 @@ pipeline {
                 bat 'cucumber --version'
             }
         }
+
+        stage('Check Git Access') {
+            steps {
+                bat 'git --version'
+                bat 'git init'
+            }
+        }
+
         stage('Checkout Code') {
             steps {
                 git branch: 'main', url: 'https://github.com/priyakamal73/cucumber-framework.git'
@@ -27,14 +28,14 @@ pipeline {
             steps {
                 bat 'echo Setting up environment...'
                 bat 'java -version'
-                bat 'mvn --version' 
-                bat 'cucumber --version' 
+                bat 'mvn --version'
+                bat 'cucumber --version'
             }
         }
 
         stage('Build Project') {
             steps {
-                bat 'mvn clean install' 
+                bat 'mvn clean install'
             }
         }
 
@@ -42,34 +43,34 @@ pipeline {
             parallel {
                 stage('Run Web App Tests') {
                     steps {
-                        bat 'cucumber -t @WebApp' 
+                        bat 'cucumber -t @WebApp'
                     }
                     post {
                         always {
-                            junit '**/target/surefire-reports/*.xml' 
-                            cucumber '**/target/cucumber-reports/*.json' 
+                            junit '**/target/surefire-reports/*.xml'
+                            cucumber '**/target/cucumber-reports/*.json'
                         }
                     }
                 }
                 stage('Run Mobile App Tests') {
                     steps {
-                        bat 'cucumber -t @MobileApp' 
+                        bat 'cucumber -t @MobileApp'
                     }
                     post {
                         always {
-                            junit '**/target/surefire-reports/*.xml' 
-                            cucumber '**/target/cucumber-reports/*.json' 
+                            junit '**/target/surefire-reports/*.xml'
+                            cucumber '**/target/cucumber-reports/*.json'
                         }
                     }
                 }
                 stage('Run API Tests') {
                     steps {
-                        bat 'cucumber -t @API' 
+                        bat 'cucumber -t @API'
                     }
                     post {
                         always {
-                            junit '**/target/surefire-reports/*.xml' 
-                            cucumber '**/target/cucumber-reports/*.json' 
+                            junit '**/target/surefire-reports/*.xml'
+                            cucumber '**/target/cucumber-reports/*.json'
                         }
                     }
                 }
@@ -85,9 +86,9 @@ pipeline {
 
     post {
         always {
-            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true 
-            archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true 
-            archiveArtifacts artifacts: '**/target/cucumber-reports/*.json', fingerprint: true 
+            archiveArtifacts artifacts: '**/target/*.jar', fingerprint: true
+            archiveArtifacts artifacts: '**/target/surefire-reports/*.xml', fingerprint: true
+            archiveArtifacts artifacts: '**/target/cucumber-reports/*.json', fingerprint: true
         }
         success {
             echo 'Build and Tests completed successfully!'
