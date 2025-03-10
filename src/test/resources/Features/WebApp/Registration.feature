@@ -17,7 +17,7 @@ Feature: User Registration
       | username       | password           | confirm password   |
       | ReemaSen       | reemaSen!123       | reemaSen!123       |
       | Shaun Mendes   | shawnMendes!123    | shawnMendes!123    |
-      | CamillaCabello | camillacabello!123 | camillacabello!123 |
+      | CamillaCabello | camillaCabello!123 | camillaCabello!123 |
 
   Scenario Outline: Invalid user registration with existing users
     Given I am on the registration page
