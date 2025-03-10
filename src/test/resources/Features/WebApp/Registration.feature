@@ -15,7 +15,7 @@ Feature: User Registration
 
     Examples:
       | username        | password            | confirm password    |
-      | ReemaSen        | reemaSen!123        | reemaSen!123        |
+      | ReemaSenn       | reemaSenn!123       | reemaSenn!123       |
       | Shaun Mendes    | shawnMendes!123     | shawnMendes!123     |
       | CamillaCabelloo | camillaCabelloo!123 | camillaCabelloo!123 |
 
