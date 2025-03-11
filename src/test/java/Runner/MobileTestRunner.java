@@ -4,8 +4,9 @@ import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdap
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.Listeners;
+import org.testng.annotations.Test;
 
-@CucumberOptions(features = "C:\\Users\\SANMUKA PRIYA\\eclipse-workspace\\Practice Testing Site\\src\\test\\resources\\Features\\MobileApp",
+@CucumberOptions(features = "src/test/resources/Features/MobileApp",
         glue = {"StepDefinitions.MobileApp", "Hooks"},
         plugin = {"pretty",
                 "html:target/cucumber-reports/cucumber.html",
@@ -17,5 +18,6 @@ import org.testng.annotations.Listeners;
 )
 
 @Listeners({ExtentITestListenerClassAdapter.class})
+@Test
 public class MobileTestRunner extends AbstractTestNGCucumberTests {
 }

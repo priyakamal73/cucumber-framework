@@ -12,7 +12,7 @@
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <cucumber.tags>@WebApp</cucumber.tags>
+        <cucumber.tags>not @Ignore</cucumber.tags>
     </properties>
 
     <dependencies>
@@ -143,6 +143,9 @@
                 <artifactId>maven-surefire-plugin</artifactId>
                 <version>3.1.2</version>
                 <configuration>
+                    <includes>
+                        <include>**/*Test.java</include>
+                    </includes>
                     <systemPropertyVariables>
                         <cucumber.filter.tags>${cucumber.tags}</cucumber.filter.tags>
                     </systemPropertyVariables>

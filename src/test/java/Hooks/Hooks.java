@@ -27,7 +27,7 @@ public class Hooks {
     protected static String baseUrl;
     protected static String authToken;
     private static Properties prop;
-    private static final String propertiesFilePath = "C:\\Users\\SANMUKA PRIYA\\eclipse-workspace\\Practice Testing Site\\src\\resources\\config\\config.properties";
+    private static final String propertiesFilePath = "src/main/resources/config/config.properties";
 
 
     public static Properties getProperties() {
