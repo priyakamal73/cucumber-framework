@@ -10,7 +10,6 @@ import org.testng.annotations.Listeners;
         plugin = {"pretty",
                 "html:target/cucumber-reports/cucumber.html",
                 "json:target/cucumber-reports/cucumber.json",
-                "com.aventstack.extentreports.cucumber.adapter.ExtentCucumberAdapter:",
                 "timeline:test-output-thread/"
         }, monochrome = true,
         dryRun = false,
