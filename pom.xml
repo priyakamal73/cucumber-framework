@@ -144,11 +144,17 @@
                 <version>3.1.2</version>
                 <configuration>
                     <includes>
-                        <include>**/*Test.java</include>
+                        <include>**/Runner/*.java</include>
                     </includes>
                     <systemPropertyVariables>
                         <cucumber.filter.tags>${cucumber.tags}</cucumber.filter.tags>
                     </systemPropertyVariables>
+                    <properties>
+                        <property>
+                            <name>listener</name>
+                            <value>org.testng.reporters.XMLReporter</value>
+                        </property>
+                    </properties>
                 </configuration>
             </plugin>
         </plugins>

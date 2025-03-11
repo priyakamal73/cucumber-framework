@@ -19,5 +19,5 @@ import org.testng.annotations.Test;
 
 @Listeners({ExtentITestListenerClassAdapter.class})
 @Test
-public class MobileTestRunner extends AbstractTestNGCucumberTests {
+public class MobileTest extends AbstractTestNGCucumberTests {
 }
