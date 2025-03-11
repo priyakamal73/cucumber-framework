@@ -1,13 +1,10 @@
 package Runner;
 
 import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdapter;
-import io.cucumber.junit.Cucumber;
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
-import org.junit.runner.RunWith;
 import org.testng.annotations.Listeners;
 
-@RunWith(Cucumber.class)
 @CucumberOptions(features = "C:\\Users\\SANMUKA PRIYA\\eclipse-workspace\\Practice Testing Site\\src\\test\\resources\\Features\\WebApp",
         glue = {"StepDefinitions.WebApp", "Hooks"},
         plugin = {"pretty",
@@ -21,5 +18,5 @@ import org.testng.annotations.Listeners;
 )
 
 @Listeners({ExtentITestListenerClassAdapter.class})
-public class TestRunner extends AbstractTestNGCucumberTests {
+public class WebTestRunner extends AbstractTestNGCucumberTests {
 }
