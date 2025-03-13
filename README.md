@@ -75,15 +75,15 @@ PracticeTestingSite/
 - **Extent Report**: Update `extent.properties` and `extent-config.xml` for extent report configurations.
 
 ## Running Tests
-### 1. Web Automation
+### 1. Web Tests
 ```sh
 mvn test -Dcucumber.tags="@WebApp"
 ```
-### 2. Mobile Automation
+### 2. Mobile Tests
 ```sh
 mvn test -Dcucumber.tags="@MobileApp"
 ```
-### 3. API Testing
+### 3. API Tests
 ```sh
 mvn test -Dcucumber.tags="@API"
 ```
