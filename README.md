@@ -13,7 +13,7 @@ This is a BDD automation framework using **Selenium - TestNG based Cucumber** fo
 - **Page Object Model (POM)** for maintainability
 - **Hooks and Tags** for better test management
 - **Cross-browser and cross-platform testing**
-- Integerated with  **Jenkins** for Continuos Integration
+- Integerated with  **Jenkins** for Continuous Integration
 
 ## Tech Stack
 - **Language**: Java
