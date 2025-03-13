@@ -63,7 +63,7 @@ PracticeTestingSite/
 │-- .gitignore                      # Git ignore file
 │-- ApiDemos-debug.apk              # Sample APK for mobile testing
 │-- README.md                       # Project documentation
-│-- chromedriver.exe                 # WebDriver binary for Chrome browser
+│-- chromedriver.exe                # WebDriver binary for Chrome browser
 │-- pom.xml                         # Maven dependencies & build configuration
 
 ```
