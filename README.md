@@ -5,7 +5,7 @@ This is a BDD automation framework using **Selenium - TestNG based Cucumber** fo
 
 ## Features
 - Supports **Web, Mobile, and API** automation
-- BDD framework using **Cucumber**
+- BDD framework using **TestNG based Cucumber**
 - Uses **Selenium WebDriver** for web automation
 - Uses **Appium** for mobile automation
 - Uses **RestAssured** for API testing
@@ -13,15 +13,17 @@ This is a BDD automation framework using **Selenium - TestNG based Cucumber** fo
 - **Page Object Model (POM)** for maintainability
 - **Hooks and Tags** for better test management
 - **Cross-browser and cross-platform testing**
+- Integerated with  **Jenkins** for Continuos Integration
 
 ## Tech Stack
 - **Language**: Java
 - **Web Automation**: Selenium WebDriver
 - **Mobile Automation**: Appium
 - **API Automation**: RestAssured
-- **Test Runner**: Cucumber
+- **Test Runner**: TestNG based Cucumber
 - **Build Tool**: Maven
 - **Reporting**: Extent Reports, Default Cucumber HTML Reports
+- **Continuous Integration**: Jenkins
 
 ## Project Structure
 ```
