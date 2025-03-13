@@ -28,38 +28,43 @@ This is a BDD automation framework using **Selenium - TestNG based Cucumber** fo
 ## Project Structure
 ```
 PracticeTestingSite/
-│-- .idea/                         # IDE settings
+│-- .idea/                         # IntelliJ project settings
 │-- src/
-│   │-- main/
-│   │   │-- java/
-│   │   │   │-- API/               # API POJO Classes
-│   │   │   │-- MobileAppPages/    # Mobile app Page Objects
-│   │   │   │-- WebAppPages/       # Web app Page Objects
-│   │   │-- resources/
-│   │   │   │-- config/            # Configuration file
-│   │-- test/
-│   │   │-- java/
-│   │   │   │-- Hooks/             # Cucumber hooks
-│   │   │   │-- Runner/            # Test runner file
-│   │   │   │-- StepDefinitions/
-│   │   │   │   │-- API/           # API step definitions
-│   │   │   │   │-- MobileApp/     # Mobile step definitions
-│   │   │   │   │-- WebApp/        # Web step definitions
-│   │   │-- resources/
-│   │   │   │-- Features/
-│   │   │   │   │-- API/           # API feature files
-│   │   │   │   │-- MobileApp/     # Mobile feature files
-│   │   │   │   │-- WebApp/        # Web feature files
-│   │   │   │-- extent.properties  # Extent report properties
-│   │   │   │-- extent-config.xml  # Extent report config
-│-- target/                        # Compiled output
-│-- test-output/                   # Test reports
-│-- test-output-thread/            # Threaded test reports
-│-- .gitignore                     # Git ignore file
-│-- ApiDemos-debug.apk             # Sample apk file for mobile app testing
-│-- chromedriver.exe               # Chrome driver executable file
-│-- pom.xml                        # pom file with dependencies
-│-- README.file                    # README file
+│   ├── main/                      # Contains application-related code
+│   │   ├── java/                  # Main application source code
+│   │   │   ├── API/               # POJO classes for API
+│   │   │   ├── MobileAppPages/    # Page Objects for Mobile App
+│   │   │   ├── WebAppPages/       # Page Objects for Web App
+│   │   ├── resources/             # Configuration files
+│   │       ├── config/            # Configurations folder
+│   │           ├── config.properties  # Contains environment URLs, credentials, etc.
+│-- test/                           
+│   ├── java/
+│   │   ├── Hooks/                  # Cucumber Hooks class (before/after scenarios)
+│   │   ├── Runner/                 # TestNG Cucumber Runner classes
+│   │   │   ├── APITest.java        # Runs API tests
+│   │   │   ├── MobileTest.java     # Runs Mobile App tests
+│   │   │   ├── WebTest.java        # Runs Web App tests
+│   │   ├── StepDefinitions/        # Step Definitions for Cucumber Scenarios
+│   │   │   ├── API/                # Step definitions for API tests
+│   │   │   ├── MobileApp/          # Step definitions for Mobile App tests
+│   │   │   ├── WebApp/             # Step definitions for Web App tests
+│   ├── resources/                  # Test-related resources
+│   │   ├── Features/               # Cucumber feature files
+│   │   │   ├── API/                # API feature files
+│   │   │   ├── MobileApp/          # Mobile App feature files
+│   │   │   ├── WebApp/             # Web App feature files
+│   │   ├── extent.properties       # Extent Report configuration
+│   │   ├── extent-config.xml       # Extent Report XML configuration
+│-- test-output-thread/             # Parallel execution reports
+│-- test-output/                    # Test output directory (TestNG reports, screenshots, logs)
+│   ├── Screenshots/                # Screenshots of test failures
+│   ├── SparkReport/                # Spark Extent Reports
+│-- .gitignore                      # Git ignore file
+│-- ApiDemos-debug.apk              # Sample APK for mobile testing
+│-- README.md                       # Project documentation
+│-- chromedriver.exe                 # WebDriver binary for Chrome browser
+│-- pom.xml                         # Maven dependencies & build configuration
 
 ```
 
@@ -72,15 +77,15 @@ PracticeTestingSite/
 ## Running Tests
 ### 1. Web Automation
 ```sh
-mvn test -Dcucumber.filter.tags="@WebApp"
+mvn test -Dcucumber.tags="@WebApp"
 ```
 ### 2. Mobile Automation
 ```sh
-mvn test -Dcucumber.filter.tags="@MobileApp"
+mvn test -Dcucumber.tags="@MobileApp"
 ```
 ### 3. API Testing
 ```sh
-mvn test -Dcucumber.filter.tags="@API"
+mvn test -Dcucumber.tags="@API"
 ```
 
 ## Reports
