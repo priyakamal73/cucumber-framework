@@ -5,10 +5,12 @@ import WebAppPages.WebInputsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
-import org.bson.types.BSONTimestamp;
 import org.testng.Assert;
 
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
 public class WebInputsStepDefs {
 
@@ -41,18 +43,16 @@ public class WebInputsStepDefs {
         String text = webInputsPage.returnText();
         String password = webInputsPage.returnPassword();
         String dateNew = webInputsPage.returnDate();
-
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
-            inputFormat.set2DigitYearStart(new SimpleDateFormat("yyyy").parse("2000"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
+            ZoneId zone = ZoneId.of("UTC");
+            LocalDate parsedDate = LocalDate.parse(Date, formatter).atStartOfDay(zone).toLocalDate();
+            String formattedDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
 
-            java.util.Date newDate = inputFormat.parse(Date);
-            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = outputFormat.format(newDate);
-
-
+            System.out.println("Input date: " + Date);
+            System.out.println("Parsed date: " + parsedDate);
+            System.out.println("Expected date: " + formattedDate);
             System.out.println("The dateNew is " + dateNew);
-            System.out.println("The formatted date is " + formattedDate);
 
             Assert.assertEquals(number, Number, "The number entered is not the same");
             Assert.assertEquals(text, Text, "The text entered is not the same");
@@ -61,7 +61,6 @@ public class WebInputsStepDefs {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         webInputsPage.clearInputs();
     }
 }
