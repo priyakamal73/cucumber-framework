@@ -14,10 +14,10 @@ Feature: User Registration
     And I should be redirected to the login page
 
     Examples:
-      | username | password    | confirm password |
-      | Decimus  | decimus!123 | decimus!123      |
-      | Quintus  | quintus!123 | quintus!123      |
-      | Vibius   | vibius!123  | vibius!123       |
+      | username      | password          | confirm password  |
+      | Perseverantia | perseverantia!123 | perseverantia!123 |
+      | Valentina     | valentina!123     | valentina!123     |
+      | Fortis        | fortis!123        | fortis!123        |
 
   Scenario Outline: Invalid user registration with existing users
     Given I am on the registration page

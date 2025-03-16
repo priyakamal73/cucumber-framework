@@ -42,22 +42,25 @@ public class WebInputsStepDefs {
         String number = webInputsPage.returnNumber();
         String text = webInputsPage.returnText();
         String password = webInputsPage.returnPassword();
-        String dateNew = webInputsPage.returnDate();
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
-            ZoneId zone = ZoneId.of("UTC");
-            LocalDate parsedDate = LocalDate.parse(Date, formatter).atStartOfDay(zone).toLocalDate();
-            String formattedDate = parsedDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String date = webInputsPage.returnDate();
 
-            System.out.println("Input date: " + Date);
-            System.out.println("Parsed date: " + parsedDate);
-            System.out.println("Expected date: " + formattedDate);
-            System.out.println("The dateNew is " + dateNew);
+        DateTimeFormatter featureFileFormat = DateTimeFormatter.ofPattern("dd-MM-yyyy", Locale.ENGLISH);
+        DateTimeFormatter webOutputFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
+        try {
+            LocalDate parsedFeatureDate = LocalDate.parse(Date, featureFileFormat);
+            LocalDate parsedWebDate = LocalDate.parse(date, webOutputFormat);
+
+            String expectedDate = parsedFeatureDate.format(webOutputFormat);
+            String actualDate = parsedWebDate.format(webOutputFormat);
+
+            System.out.println("The obtained date is " + actualDate);
+            System.out.println("The date from the feature file is " + expectedDate);
 
             Assert.assertEquals(number, Number, "The number entered is not the same");
             Assert.assertEquals(text, Text, "The text entered is not the same");
             Assert.assertEquals(password, Password, "The password entered is not the same");
-            Assert.assertEquals(dateNew, formattedDate, "The date entered is not the same");
+            Assert.assertEquals(actualDate, expectedDate, "The date entered is not the same");
         } catch (Exception e) {
             e.printStackTrace();
         }
