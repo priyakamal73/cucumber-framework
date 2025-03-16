@@ -42,10 +42,11 @@ public class WebInputsStepDefs {
         String dateNew = webInputsPage.returnDate();
 
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yy");
             java.util.Date newDate = inputFormat.parse(Date);
             SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = outputFormat.format(newDate);
+
             Assert.assertEquals(number, Number, "The number entered is not the same");
             Assert.assertEquals(text, Text, "The text entered is not the same");
             Assert.assertEquals(password, Password, "The password entered is not the same");
