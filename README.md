@@ -75,9 +75,13 @@ PracticeTestingSite/
 - **Extent Report**: Update `extent.properties` and `extent-config.xml` for extent report configurations.
 
 ## Running Tests
-### 1. Web Tests
+### 1. Web Tests (Runs in headless mode by default)
 ```sh
 mvn test -Dcucumber.tags="@WebApp"
+```
+### To run Web Tests in headed mode
+```sh
+mvn test -Dcucumber.tags="@WebApp" -Dheadless=false
 ```
 ### 2. Mobile Tests
 ```sh
