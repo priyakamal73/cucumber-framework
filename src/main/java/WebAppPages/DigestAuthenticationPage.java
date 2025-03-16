@@ -5,7 +5,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -23,6 +22,7 @@ public class DigestAuthenticationPage {
 
     @FindBy(xpath = "//p[@role=\"alert\"]")
     private WebElement message;
+
 
     public void clickDigestAuthLink() {
 
@@ -86,13 +86,7 @@ public class DigestAuthenticationPage {
         }
     }
 
-    public void isSuccessAlertDisplayed() {
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        Assert.assertEquals(message.getText(), "Congratulations! You must have the proper credentials.", "Authentication failed");
+    public String returnMessage() {
+        return message.getText();
     }
-
 }

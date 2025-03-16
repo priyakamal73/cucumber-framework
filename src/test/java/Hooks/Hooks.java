@@ -6,12 +6,11 @@ import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.Scenario;
 import io.restassured.RestAssured;
-import lombok.Getter;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
-
+import org.openqa.selenium.chrome.ChromeOptions;
 import java.io.IOException;
 import java.io.InputStream;
 import java.net.URL;
@@ -23,6 +22,7 @@ import java.util.Properties;
 public class Hooks {
 
     protected static WebDriver driver;
+    protected static ChromeOptions options;
     protected static AndroidDriver androidDriver;
     protected static String baseUrl;
     protected static String authToken;
@@ -44,7 +44,6 @@ public class Hooks {
     public void setup(Scenario scenario) {
         Properties prop = getProperties();
 
-        // Determine whether the test is for WebApp  or API or MobileApp by checking tags or properties
         String testType = scenario.getSourceTagNames().stream()
                 .filter(tag -> tag.contains("@WebApp") || tag.contains("@API") || tag.contains("@MobileApp"))
                 .findFirst().orElse("");
@@ -54,7 +53,15 @@ public class Hooks {
 
             if (browser.equalsIgnoreCase("chrome")) {
                 System.setProperty("webdriver.chrome.driver", "C:\\Users\\SANMUKA PRIYA\\eclipse-workspace\\Practice Testing Site\\chromedriver.exe");
-                driver = new ChromeDriver();
+                options = new ChromeOptions();
+                options.addArguments("--headless=new");
+                options.addArguments("--disable-blink-features=AutomationControlled");
+                options.addArguments("--disable-gpu");
+                options.addArguments("--window-size=1920,1080");
+                options.addArguments("--disable-popup-blocking");
+                options.addArguments("--remote-allow-origins=*");
+                driver = new ChromeDriver(options);
+
             } else {
                 throw new RuntimeException("Unsupported browser: " + browser);
             }
@@ -88,11 +95,11 @@ public class Hooks {
         return authToken;
     }
 
-    public static AndroidDriver getAndroidDriver(){
+    public static AndroidDriver getAndroidDriver() {
         return androidDriver;
     }
 
-    public static String getPropertiesFilePath(){
+    public static String getPropertiesFilePath() {
         return propertiesFilePath;
     }
 

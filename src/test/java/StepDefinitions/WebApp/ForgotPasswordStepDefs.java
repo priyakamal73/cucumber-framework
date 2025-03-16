@@ -5,9 +5,9 @@ import WebAppPages.ForgotPasswordPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 public class ForgotPasswordStepDefs {
-
     ForgotPasswordPage forgotPasswordPage = new ForgotPasswordPage(Hooks.getDriver());
 
     @Given("I am on the forgot password screen")
@@ -28,6 +28,7 @@ public class ForgotPasswordStepDefs {
 
     @Then("I should see the success message")
     public void i_should_see_the_success_message() {
-        forgotPasswordPage.isSuccessMessageDisplayed();
+        String message = forgotPasswordPage.returnMessage();
+        Assert.assertEquals(message, "An e-mail has been sent to you which explains how to reset your password.", "Reset failed");
     }
 }

@@ -76,12 +76,12 @@ public class LoginPage {
         loginButton.click();
     }
 
-    public void isSuccessMessageDisplayed() {
-        Assert.assertEquals(message.getText(), "You logged into a secure area!", "Login Failed");
+    public String returnMessage() {
+        return message.getText();
     }
 
-    public void isSecurePageRedirected() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://practice.expandtesting.com/secure", "Login Failed");
+    public String returnCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 
     public void clickLogoutButton() {
@@ -93,13 +93,5 @@ public class LoginPage {
             throw new RuntimeException(e);
         }
         logoutButton.click();
-    }
-
-    public void isErrorMessageDisplayed() {
-        Assert.assertEquals(message.getText(), "Your password is invalid!", "Login Successful");
-    }
-
-    public void isLoginPageSeen() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://practice.expandtesting.com/login", "Login Successful");
     }
 }

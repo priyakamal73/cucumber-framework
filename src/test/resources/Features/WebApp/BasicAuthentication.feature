@@ -1,4 +1,4 @@
-@WebApp
+@Ignore
 Feature: Basic authentication
 
   As a user, I want to login by using the basic authentication

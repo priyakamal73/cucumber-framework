@@ -5,6 +5,9 @@ import WebAppPages.WebInputsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
+
+import java.text.SimpleDateFormat;
 
 public class WebInputsStepDefs {
 
@@ -14,7 +17,6 @@ public class WebInputsStepDefs {
     public void i_am_on_the_web_inputs_page() {
         webInputsPage.scrollPage();
         webInputsPage.clickInputsPageButton();
-        webInputsPage.dismissTheGoogleAd();
     }
 
     @When("I enter valid {string}, {string}, {string} and {string}")
@@ -33,8 +35,25 @@ public class WebInputsStepDefs {
 
     @Then("I must see the {string}, {string}, {string} and {string} that I entered as output")
     public void iMustSeeTheAndThatIEnteredAsOutput(String Number, String Text, String Password, String Date) {
-        webInputsPage.isOutputDisplayedAndAccurate(Number, Text, Password, Date);
+
+        String number = webInputsPage.returnNumber();
+        String text = webInputsPage.returnText();
+        String password = webInputsPage.returnPassword();
+        String dateNew = webInputsPage.returnDate();
+
+        try {
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+            java.util.Date newDate = inputFormat.parse(Date);
+            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
+            String formattedDate = outputFormat.format(newDate);
+            Assert.assertEquals(number, Number, "The number entered is not the same");
+            Assert.assertEquals(text, Text, "The text entered is not the same");
+            Assert.assertEquals(password, Password, "The password entered is not the same");
+            Assert.assertEquals(dateNew, formattedDate, "The date entered is not the same");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
         webInputsPage.clearInputs();
     }
-
 }

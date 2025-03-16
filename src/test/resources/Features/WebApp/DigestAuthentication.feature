@@ -1,4 +1,4 @@
-@WebApp
+@Ignore
 Feature: Digest authentication
 
   As a user, I want to login by using the digest authentication

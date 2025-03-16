@@ -6,7 +6,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.List;
 
@@ -50,9 +49,11 @@ public class DynamicTablePage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
 
-        dynamicTablePage.click();
+        if(driver.getCurrentUrl().contains("https://practice.expandtesting.com/#google_vignette")){
+            js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+            dynamicTablePage.click();
+        }
     }
 
     public void getCPULoadFromTable() {
@@ -90,8 +91,12 @@ public class DynamicTablePage {
         chromeCPU = "Chrome CPU: " + driver.findElement(By.xpath("//table//tr[" + (rowIndex + 1) + "]/td[" + (headerIndex + 1) + "]")).getText();
     }
 
-    public void compareValues() {
-        Assert.assertEquals(chromeCPU, yellowLabel.getText(), "The Chrome CPU values are different");
+    public String getChromeCPU() {
+        return chromeCPU;
+    }
+
+    public String getYellowLabel() {
+        return yellowLabel.getText();
     }
 
     public void refreshPage() {

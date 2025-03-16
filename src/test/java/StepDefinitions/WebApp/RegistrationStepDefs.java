@@ -6,6 +6,7 @@ import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 
 public class RegistrationStepDefs {
@@ -32,12 +33,14 @@ public class RegistrationStepDefs {
 
     @Then("I should see a success message")
     public void i_should_see_a_success_message() {
-        registrationPage.isSuccessMessageDisplayed();
+        String message = registrationPage.returnMessage();
+        Assert.assertEquals(message, "Successfully registered, you can log in now.", "Registration Failed");
     }
 
     @Then("I should be redirected to the login page")
     public void i_should_be_redirected_to_the_login_page() {
-        registrationPage.isLoginPageRedirected();
+        String currentUrl = registrationPage.returnCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://practice.expandtesting.com/login", "Registration Failed");
     }
 
     @When("I enter existing users {string}, {string}, and {string}")
@@ -50,11 +53,13 @@ public class RegistrationStepDefs {
 
     @Then("I should see an error message")
     public void iShouldSeeAnErrorMessage() {
-        registrationPage.isErrorMessageDisplayed();
+        String message = registrationPage.returnMessage();
+        Assert.assertEquals(message, "An error occurred during registration. Please try again.", "Registration Successful");
     }
 
     @And("I should remain in the register page")
     public void iShouldRemainInTheRegisterPage() {
-        registrationPage.isRegisterpageRetained();
+        String currentUrl = registrationPage.returnCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://practice.expandtesting.com/register", "Registration Successful");
     }
 }

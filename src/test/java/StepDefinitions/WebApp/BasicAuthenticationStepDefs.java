@@ -5,6 +5,7 @@ import WebAppPages.BasicAuthenticationPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 public class BasicAuthenticationStepDefs {
 
@@ -21,7 +22,9 @@ public class BasicAuthenticationStepDefs {
     }
 
     @Then("I must see the success message")
-    public void iMustSeeTheSuccessMessage() {
-        basicAuthenticationPage.isSuccessAlertDisplayed();
+    public void iMustSeeTheSuccessMessage() throws InterruptedException {
+        String message = basicAuthenticationPage.returnMessage();
+        Thread.sleep(3000);
+        Assert.assertEquals(message, "Congratulations! You must have the proper credentials.", "Authentication failed");
     }
 }

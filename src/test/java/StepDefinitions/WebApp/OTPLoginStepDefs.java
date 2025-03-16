@@ -5,6 +5,7 @@ import WebAppPages.OTPLoginPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 public class OTPLoginStepDefs {
 
@@ -35,7 +36,8 @@ public class OTPLoginStepDefs {
 
     @Then("I should see the confirmation message with the email address")
     public void i_should_see_the_confirmation_message_with_the_email_address() {
-        otpLoginPage.isConfirmationMessageDisplayed(email);
+        String otpMessage = otpLoginPage.returnOTPMessage();
+        Assert.assertEquals(otpMessage, "We've sent an OTP code to your email: " + email, "The success message is not displayed");
     }
 
     @When("I enter the correct otp code from the email address")
@@ -50,9 +52,12 @@ public class OTPLoginStepDefs {
     }
 
     @Then("I should land on the secure area page")
-    public void i_should_land_on_the_secure_area_page() {
-        otpLoginPage.isSecurePageRedirected();
-        otpLoginPage.isSuccessMessageDisplayed();
+    public void i_should_land_on_the_secure_area_page() throws InterruptedException {
+        Thread.sleep(5000);
+        String currentUrl = otpLoginPage.returnCurrentUrl();
+        Assert.assertEquals(currentUrl, "https://practice.expandtesting.com/secure", "Login Failed");
+        String message = otpLoginPage.returnMessage();
+        Assert.assertEquals(message, "You logged into a secure area!", "Login Failed");
     }
 
     @Then("I logout")

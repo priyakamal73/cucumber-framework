@@ -23,12 +23,6 @@ public class WebInputsPage {
     @FindBy(xpath = "//a[@href='/inputs']")
     private WebElement webInputsPageButton;
 
-    @FindBy(id = "aswift_9")
-    private WebElement iframe;
-
-    @FindBy(xpath = "//*[@id=\"dismiss-button\"]")
-    private WebElement adDismissButton;
-
     @FindBy(id = "input-number")
     private WebElement numberField;
 
@@ -71,19 +65,12 @@ public class WebInputsPage {
     }
     public void clickInputsPageButton() {
         webInputsPageButton.click();
-    }
-    public void dismissTheGoogleAd() {
-        try {
-            if (iframe.isDisplayed()) {
-                driver.switchTo().frame(iframe);
-                adDismissButton.click();
-                driver.switchTo().defaultContent();
-            }
-        } catch (NoSuchElementException e) {
-            System.out.println("Ad or dismiss button not found. Continuing with the script");
+        if(driver.getCurrentUrl().contains("https://practice.expandtesting.com/#google_vignette")){
+            JavascriptExecutor js = (JavascriptExecutor) driver;
+            js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+            webInputsPageButton.click();
         }
     }
-
     public void enterNumber(String number) {
         numberField.sendKeys(number);
     }
@@ -99,21 +86,22 @@ public class WebInputsPage {
     public void clickDisplayInputs() {
         displayInputsButton.click();
     }
-    public void isOutputDisplayedAndAccurate(String number, String text, String password, String date) {
-        try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
-            Date newDate = inputFormat.parse(date);
-            SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
-            String formattedDate = outputFormat.format(newDate);
-            Assert.assertEquals(numberOutputField.getText(), number, "The number entered is not the same");
-            Assert.assertEquals(textOutputField.getText(), text, "The text entered is not the same");
-            Assert.assertEquals(passwordOutputField.getText(), password, "The password entered is not the same");
-            Assert.assertEquals(dateOutputField.getText(), formattedDate, "The date entered is not the same");
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+
+    public String returnNumber(){
+        return numberOutputField.getText();
     }
 
+    public String returnText(){
+        return textOutputField.getText();
+    }
+
+    public String returnPassword(){
+        return passwordOutputField.getText();
+    }
+
+    public String returnDate(){
+        return dateOutputField.getText();
+    }
 
     public void clearInputs(){
          clearInputsButton.click();

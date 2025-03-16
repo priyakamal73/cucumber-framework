@@ -3,7 +3,6 @@ package WebAppPages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -75,7 +74,7 @@ public class OTPLoginPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        //js.executeScript("arguments[0].click()", tempMailCopyButton);
+
         tempMailCopyButton.click();
         try {
             Thread.sleep(3000);
@@ -132,7 +131,7 @@ public class OTPLoginPage {
         sendOtpCodeButton.click();
     }
 
-    public void isConfirmationMessageDisplayed(String email) {
+    public String returnOTPMessage() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0, 250)");
         try {
@@ -140,7 +139,7 @@ public class OTPLoginPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        Assert.assertEquals(otpMessage.getText(), "We've sent an OTP code to your email: " + email, "The success message is not displayed");
+        return otpMessage.getText();
     }
 
     public int getOTPCodeFromEmail() {
@@ -179,12 +178,12 @@ public class OTPLoginPage {
         verifyOtpCodeButton.click();
     }
 
-    public void isSecurePageRedirected() {
-        Assert.assertEquals(driver.getCurrentUrl(), "https://practice.expandtesting.com/secure", "Login Failed");
+    public String returnCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 
-    public void isSuccessMessageDisplayed() {
-        Assert.assertEquals(message.getText(), "You logged into a secure area!", "Login Failed");
+    public String returnMessage() {
+        return message.getText();
     }
 
     public void logout() {

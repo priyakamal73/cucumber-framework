@@ -63,7 +63,7 @@ public class ForgotPasswordPage {
         retrievePasswordButton.click();
     }
 
-    public void isSuccessMessageDisplayed() {
-        Assert.assertEquals(message.getText(), "An e-mail has been sent to you which explains how to reset your password.", "Reset failed");
+    public String returnMessage() {
+        return message.getText();
     }
 }

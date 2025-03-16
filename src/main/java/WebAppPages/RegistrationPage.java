@@ -5,16 +5,16 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
 
 public class RegistrationPage {
     private final WebDriver driver;
 
-    // Constructor to inject WebDriver
+
     public RegistrationPage(WebDriver driver) {
         this.driver = driver;
         PageFactory.initElements(driver, this);
     }
+
 
     @FindBy(xpath = "//*[@id=\"examples\"]/div[1]/div[3]/div/div/h3/a")
     private WebElement registerPageButton;
@@ -34,17 +34,16 @@ public class RegistrationPage {
     @FindBy(id = "flash")
     private WebElement message;
 
-
-    // Actions on the registration page
-    public void clickRegisterPageLink(){
-        JavascriptExecutor js = (JavascriptExecutor)driver;
-        js.executeScript("arguments[0].click()",registerPageButton);
+    public void clickRegisterPageLink() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click()", registerPageButton);
     }
 
-    public void scrollPage(){
-        JavascriptExecutor js = (JavascriptExecutor)driver;
+    public void scrollPage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.scrollBy(0,350)");
     }
+
     public void enterUsername(String username) {
         usernameField.sendKeys(username);
     }
@@ -61,16 +60,11 @@ public class RegistrationPage {
         registerButton.click();
     }
 
-    public void isSuccessMessageDisplayed() {
-        Assert.assertEquals(message.getText(),"Successfully registered, you can log in now.","Registration Failed");
+    public String returnMessage() {
+        return message.getText();
     }
-    public void isLoginPageRedirected() {
-        Assert.assertEquals(driver.getCurrentUrl(),"https://practice.expandtesting.com/login","Registration Failed");
-    }
-    public void isErrorMessageDisplayed() {
-        Assert.assertEquals(message.getText(),"An error occurred during registration. Please try again.","Registration Successful");
-    }
-    public void isRegisterpageRetained() {
-        Assert.assertEquals(driver.getCurrentUrl(),"https://practice.expandtesting.com/register","Registration Successful");
+
+    public String returnCurrentUrl() {
+        return driver.getCurrentUrl();
     }
 }
