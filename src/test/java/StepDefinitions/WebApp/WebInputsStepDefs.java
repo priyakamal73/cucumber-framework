@@ -5,6 +5,7 @@ import WebAppPages.WebInputsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.bson.types.BSONTimestamp;
 import org.testng.Assert;
 
 import java.text.SimpleDateFormat;
@@ -42,10 +43,16 @@ public class WebInputsStepDefs {
         String dateNew = webInputsPage.returnDate();
 
         try {
-            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yy");
+            SimpleDateFormat inputFormat = new SimpleDateFormat("dd-MM-yyyy");
+            inputFormat.set2DigitYearStart(new SimpleDateFormat("yyyy").parse("2000"));
+
             java.util.Date newDate = inputFormat.parse(Date);
             SimpleDateFormat outputFormat = new SimpleDateFormat("yyyy-MM-dd");
             String formattedDate = outputFormat.format(newDate);
+
+
+            System.out.println("The dateNew is " + dateNew);
+            System.out.println("The formatted date is " + formattedDate);
 
             Assert.assertEquals(number, Number, "The number entered is not the same");
             Assert.assertEquals(text, Text, "The text entered is not the same");
