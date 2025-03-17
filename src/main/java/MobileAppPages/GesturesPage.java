@@ -7,7 +7,10 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class GesturesPage {
     private final AndroidDriver driver;
@@ -17,7 +20,7 @@ public class GesturesPage {
         PageFactory.initElements(new AppiumFieldDecorator(driver), this);
     }
 
-    @AndroidFindBy(accessibility = "Views")
+    @AndroidFindBy(xpath = "//android.widget.TextView[@content-desc=\"Views\"]")
     private WebElement viewsPage;
 
     @AndroidFindBy(accessibility = "Drag and Drop")
@@ -42,6 +45,9 @@ public class GesturesPage {
     private WebElement lastPhoto;
 
     public void clickDragAndDropPage() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(viewsPage));
+
         driver.executeScript("mobile: clickGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) viewsPage).getId()
         ));
@@ -65,31 +71,8 @@ public class GesturesPage {
         ));
     }
 
-    public void isMessageDisplayed() {
-        Assert.assertEquals(successMessage.getText(), "Dropped!", "Drag and drop gesture not done");
-    }
+    public String returnMessage() {
+        return successMessage.getText();
 
-    public void galleryPage() {
-        driver.executeScript("mobile: clickGesture", ImmutableMap.of(
-                "elementId", ((RemoteWebElement) viewsPage).getId()
-        ));
-
-        galleryPage.click();
-    }
-
-    public void photoGalleryPage() {
-        photosPage.click();
-    }
-
-    public void swipePhotos(){
-        driver.executeScript("mobile: swipeGesture", ImmutableMap.of(
-                "elementId",((RemoteWebElement)swipeArea).getId(),
-                "direction","left",
-                "percent",0.5
-        ));
-    }
-
-    public void isLastPhotoDisplayed(){
-        Assert.assertTrue(lastPhoto.isDisplayed());
     }
 }

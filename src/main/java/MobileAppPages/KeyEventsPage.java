@@ -9,7 +9,10 @@ import io.appium.java_client.pagefactory.AppiumFieldDecorator;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.remote.RemoteWebElement;
 import org.openqa.selenium.support.PageFactory;
-import org.testng.Assert;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+
+import java.time.Duration;
 
 public class KeyEventsPage {
 
@@ -29,21 +32,33 @@ public class KeyEventsPage {
     @AndroidFindBy(xpath = "//android.widget.TextView[@content-desc=\"TextFields\"]")
     private WebElement textFieldsPage;
 
-    @AndroidFindBy(xpath = "//android.widget.EditText[@resource-id=\"io.appium.android.apis:id/edit\"]")
+    @AndroidFindBy(id = "io.appium.android.apis:id/edit")
     private WebElement textAreaLine;
 
     public void clickViewsPage() {
-        viewsPage.click();
+        driver.executeScript("mobile: clickGesture", ImmutableMap.of(
+                "elementId", ((RemoteWebElement) viewsPage).getId()
+        ));
+    }
+
+    public void clicktextFieldsPage(){
 
         driver.executeScript("mobile: scrollGesture", ImmutableMap.of(
                 "elementId", ((RemoteWebElement) scrollArea).getId(),
                 "direction", "down",
                 "percent", 2.5
         ));
-    }
 
-    public void clicktextFieldsPage(){
-        textFieldsPage.click();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(textFieldsPage));
+
+        try {
+            driver.executeScript("mobile: clickGesture", ImmutableMap.of(
+                    "elementId", ((RemoteWebElement) textFieldsPage).getId()
+            ));
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     public void clickFirstLineOfEditableArea() {
@@ -61,7 +76,8 @@ public class KeyEventsPage {
         driver.pressKey(new KeyEvent(AndroidKey.E));
     }
 
-    public void isTextSeen(){
-        Assert.assertTrue(textAreaLine.getText().contains("hi"));
+    public String returnText(){
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(5));
+        return textAreaLine.getText();
     }
 }

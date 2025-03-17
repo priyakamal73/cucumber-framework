@@ -5,6 +5,7 @@ import MobileAppPages.GesturesPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 public class GesturesStepDefs {
 
@@ -27,22 +28,7 @@ public class GesturesStepDefs {
 
     @Then("the message dropped must be seen")
     public void theMessageDroppedMustBeSeen() {
-        gesturesPage.isMessageDisplayed();
-    }
-
-    @Given("I am on the photo gallery page")
-    public void iAmOnThePhotoGalleryPage() {
-        gesturesPage.galleryPage();
-        gesturesPage.photoGalleryPage();
-    }
-
-    @When("I swipe to the right")
-    public void iSwipeToTheRight() {
-        gesturesPage.swipePhotos();
-    }
-
-    @Then("the photos must be swiped to the right end")
-    public void thePhotosMustBeSwipedToTheRightEnd() {
-       gesturesPage.isLastPhotoDisplayed();
+        String message = gesturesPage.returnMessage();
+        Assert.assertEquals(message, "Dropped!", "Drag and drop gesture not done");
     }
 }

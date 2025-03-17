@@ -5,6 +5,7 @@ import MobileAppPages.KeyEventsPage;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
+import org.testng.Assert;
 
 public class KeyEventsStepDefs {
 
@@ -28,6 +29,7 @@ public class KeyEventsStepDefs {
 
     @Then("the text must be seen successfully")
     public void the_text_must_be_seen_successfully() {
-        keyEventsPage.isTextSeen();
+        String text = keyEventsPage.returnText();
+        Assert.assertTrue(text.contains("hi"));
     }
 }

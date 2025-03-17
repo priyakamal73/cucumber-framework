@@ -82,7 +82,7 @@ public class Hooks {
                 options.setCapability("appium:app", path);
                 URL url = new URL("http://0.0.0.0:4723");
                 androidDriver = new AndroidDriver(url, options);
-                Thread.sleep(3000);
+                Thread.sleep(2000);
             } catch (Exception e) {
                 throw new RuntimeException("Appium driver initialization failed: " + e.getMessage());
             }
