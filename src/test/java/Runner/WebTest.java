@@ -18,6 +18,5 @@ import org.testng.annotations.Test;
 )
 
 @Listeners({ExtentITestListenerClassAdapter.class})
-@Test
 public class WebTest extends AbstractTestNGCucumberTests {
 }

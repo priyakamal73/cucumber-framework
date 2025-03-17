@@ -4,7 +4,6 @@ import com.aventstack.extentreports.testng.listener.ExtentITestListenerClassAdap
 import io.cucumber.testng.AbstractTestNGCucumberTests;
 import io.cucumber.testng.CucumberOptions;
 import org.testng.annotations.Listeners;
-import org.testng.annotations.Test;
 
 @CucumberOptions(features = "src/test/resources/Features/API",
         glue = {"StepDefinitions.API", "Hooks"},
@@ -18,6 +17,5 @@ import org.testng.annotations.Test;
 )
 
 @Listeners({ExtentITestListenerClassAdapter.class})
-@Test
 public class APITest extends AbstractTestNGCucumberTests {
 }

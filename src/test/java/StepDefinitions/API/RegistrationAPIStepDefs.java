@@ -12,7 +12,7 @@ import static io.restassured.RestAssured.given;
 public class RegistrationAPIStepDefs {
     private final Properties prop;
     private Response response;
-    RegistrationDetails registerationDetails = new RegistrationDetails();
+    RegistrationDetails registrationDetails = new RegistrationDetails();
 
     public RegistrationAPIStepDefs() {
         this.prop = Hooks.getProperties();
@@ -25,14 +25,14 @@ public class RegistrationAPIStepDefs {
         String password = prop.getProperty("api.password");
         String name = prop.getProperty("api.name");
 
-        registerationDetails.setName(name);
-        registerationDetails.setEmail(email);
-        registerationDetails.setPassword(password);
+        registrationDetails.setName(name);
+        registrationDetails.setEmail(email);
+        registrationDetails.setPassword(password);
 
         response = given()
                 .header("accept", "application/json")
                 .header("Content-Type", "application/json")
-                .body(registerationDetails)
+                .body(registrationDetails)
                 .when()
                 .post("/users/register");
     }
