@@ -1,7 +1,7 @@
 # Selenium Java - Cucumber Framework
 
 ## Overview
-This is a BDD automation framework using **Selenium - TestNG based Cucumber** for testing **Web, Mobile, and API applications**. It integrates **Appium for mobile automation** and **RestAssured for API automation** to provide a unified testing solution with **Extent Report**. Currently the site used for webapp and API testing is `Expand Testing - Practice Testing Site` and the app for mobile app testing is `ApiDemos-debug.apk`
+This is a BDD automation framework using **Selenium - TestNG based Cucumber** for testing **Web, Mobile, and API applications**. It integrates **Appium for mobile automation** and **RestAssured for API automation** to provide a unified testing solution with **Allure Report**. Currently the site used for webapp and API testing is `Expand Testing - Practice Testing Site` and the app for mobile app testing is `ApiDemos-debug.apk`
 
 ## Features
 - Supports **Web, Mobile, and API** automation
@@ -9,7 +9,7 @@ This is a BDD automation framework using **Selenium - TestNG based Cucumber** fo
 - Uses **Selenium WebDriver** for web automation
 - Uses **Appium** for mobile automation
 - Uses **RestAssured** for API testing
-- Generates **Extent Report with Screenshots for failed cases**
+- Generates **Allure Report with Screenshots for failed cases**
 - **Page Object Model (POM)** for maintainability
 - **Hooks and Tags** for better test management
 - **Cross-browser and cross-platform testing**
@@ -22,7 +22,7 @@ This is a BDD automation framework using **Selenium - TestNG based Cucumber** fo
 - **API Automation**: RestAssured
 - **Test Runner**: TestNG based Cucumber
 - **Build Tool**: Maven
-- **Reporting**: Extent Reports, Default Cucumber HTML Reports
+- **Reporting**: Allure Report
 - **Continuous Integration**: Jenkins
 
 ## Project Structure
@@ -54,16 +54,14 @@ PracticeTestingSite/
 │   │   │   ├── API/                # API feature files
 │   │   │   ├── MobileApp/          # Mobile App feature files
 │   │   │   ├── WebApp/             # Web App feature files
-│   │   ├── extent.properties       # Extent Report configuration
-│   │   ├── extent-config.xml       # Extent Report XML configuration
+│   │   ├── allure.properties       # Allure Report configuration
 │-- test-output-thread/             # Parallel execution reports
 │-- test-output/                    # Test output directory (TestNG reports, screenshots, logs)
-│   ├── Screenshots/                # Screenshots of test failures
-│   ├── SparkReport/                # Spark Extent Reports
+│   ├── allure-report/              # Screenshots of test failures
+│   ├── allure-results/             # Spark Extent Reports
 │-- .gitignore                      # Git ignore file
 │-- ApiDemos-debug.apk              # Sample APK for mobile testing
 │-- README.md                       # Project documentation
-│-- chromedriver.exe                # WebDriver binary for Chrome browser
 │-- pom.xml                         # Maven dependencies & build configuration
 
 ```
@@ -72,7 +70,7 @@ PracticeTestingSite/
 - **Web App**: Update `config.properties` with browser settings.
 - **Mobile App**: Set desired capabilities in `Hooks.java` class.
 - **API Testing**: Configure base URLs, authToken and other fields in `config.properties`.
-- **Extent Report**: Update `extent.properties` and `extent-config.xml` for extent report configurations.
+- **Allure Report**: Update `allure.properties`  for extent report configurations.
 
 ## Running Tests
 ### 1. Web Tests (Runs in headless mode by default)
@@ -93,5 +91,4 @@ mvn test -Dcucumber.tags="@API"
 ```
 
 ## Reports
-- **Extent Report**: `test-output/SparkReport/ExtentReport.html`
-- **Cucumber HTML Report**: `target/cucumber-reports/index.html`
+- **Allure Report**: `test-output/allure-results`
