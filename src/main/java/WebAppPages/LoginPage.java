@@ -16,8 +16,11 @@ public class LoginPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"examples\"]/div[1]/div[2]/div/div/h3/a")
+    @FindBy(linkText = "Test Login Page")
     private WebElement loginPageButton;
+
+    @FindBy(xpath = "//b[normalize-space()='SuperSecretPassword!']")
+    private WebElement usernameLabel;
 
     @FindBy(id = "username")
     private WebElement usernameField;
@@ -38,26 +41,24 @@ public class LoginPage {
     //Actions on the login page
     public void clickLoginPageLink() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,200)");
+        js.executeScript("arguments[0].scrollIntoView(true);", loginPageButton);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         js.executeScript("arguments[0].click()", loginPageButton);
     }
 
-    public void scrollPage() {
+
+    public void enterUsername(String username) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,400)");
+        js.executeScript("arguments[0].scrollIntoView(true);", usernameLabel);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    public void enterUsername(String username) {
         usernameField.sendKeys(username);
     }
 
@@ -66,10 +67,8 @@ public class LoginPage {
     }
 
     public void clickLoginButton() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,100)");
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -86,7 +85,7 @@ public class LoginPage {
 
     public void clickLogoutButton() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,200)");
+        js.executeScript("window.scrollBy(0,300)");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

@@ -1,4 +1,4 @@
-@WebApp
+@WebApp @Smoke @Regression
 Feature: OTP Login
 
   As a registered user, I want to login using OTP

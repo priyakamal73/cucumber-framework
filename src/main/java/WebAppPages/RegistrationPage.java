@@ -36,15 +36,18 @@ public class RegistrationPage {
 
     public void clickRegisterPageLink() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true)", registerPageButton);
         js.executeScript("arguments[0].click()", registerPageButton);
     }
 
-    public void scrollPage() {
-        JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,350)");
-    }
-
     public void enterUsername(String username) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         usernameField.sendKeys(username);
     }
 

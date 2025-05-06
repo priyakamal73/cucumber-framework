@@ -1,4 +1,4 @@
-@WebApp
+@WebApp @Regression
 Feature: Dynamic Table handling
 
   As a user, I want to get the CPU load of Chrome process before and after refresh

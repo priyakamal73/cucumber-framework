@@ -1,0 +1,9 @@
+{
+  "name": "Jenkins",
+  "type": "CI",
+  "url": "http://localhost:8080/job/Practice%20Test%20Site%20Suite/",
+  "buildOrder": 123,
+  "buildName": "Build #123",
+  "buildUrl": "http://jenkins.example.com/job/my-job/123",
+  "reportUrl": "http://jenkins.example.com/job/my-job/123/AllureReport"
+}

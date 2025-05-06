@@ -1,4 +1,4 @@
-@WebApp
+@WebApp @Smoke @Regression @ForgotPassword @Now
 Feature: Forgot password
 
   As a registered user, I want to change my password

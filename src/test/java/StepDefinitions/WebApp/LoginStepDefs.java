@@ -7,19 +7,18 @@ import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
 
+
 public class LoginStepDefs {
 
     LoginPage loginPage = new LoginPage(Hooks.getDriver());
 
     @Given("I am on the login page")
     public void i_am_on_the_login_page() {
-        loginPage.scrollPage();
         loginPage.clickLoginPageLink();
     }
 
     @When("I enter valid {string} and {string}")
     public void i_enter_valid_and(String userName, String passWord) {
-        loginPage.scrollPage();
         loginPage.enterUsername(userName);
         loginPage.enterPassword(passWord);
     }
@@ -54,7 +53,6 @@ public class LoginStepDefs {
 
     @When("I enter valid{string} and invalid {string}")
     public void iEnterValidAndInvalid(String userName, String passWord) {
-        loginPage.scrollPage();
         loginPage.enterUsername(userName);
         loginPage.enterPassword(passWord);
     }
@@ -63,7 +61,6 @@ public class LoginStepDefs {
     public void i_must_see_an_error_message() {
         String message = loginPage.returnMessage();
         Assert.assertEquals(message, "Your password is invalid!", "Login Successful");
-
     }
 
     @Then("remain on the login page")

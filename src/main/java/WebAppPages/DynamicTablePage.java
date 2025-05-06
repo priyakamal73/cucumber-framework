@@ -35,9 +35,9 @@ public class DynamicTablePage {
 
     public void clickDynamicTablePageButton() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,650)");
+        js.executeScript("arguments[0].scrollIntoView(true);", dynamicTablePage);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(1000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -52,13 +52,20 @@ public class DynamicTablePage {
 
         if(driver.getCurrentUrl().contains("https://practice.expandtesting.com/#google_vignette")){
             js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+            js.executeScript("window.scrollBy(0,-1000)");
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             dynamicTablePage.click();
         }
     }
 
     public void getCPULoadFromTable() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,420)");
+        js.executeScript("window.scrollBy(0,520)");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {

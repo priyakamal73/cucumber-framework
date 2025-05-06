@@ -1,4 +1,4 @@
-@WebApp
+@WebApp @Regression
 Feature: Test web input fields
 
   Scenario Outline: Successful data for all the input fields

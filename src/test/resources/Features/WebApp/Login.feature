@@ -1,4 +1,4 @@
-@WebApp
+@WebApp @Smoke @Regression
 Feature: User login
 
   As a registered user
@@ -16,10 +16,10 @@ Feature: User login
     Then I must be back to the login page
 
     Examples:
-      | username  | password   |
-      | gloria123 | Gloria@123 |
-      | jay123    | Jay@123    |
-      | manny123  | Manny@123  |
+      | username  | password      |
+      | gloria123 | Gloria@123    |
+      | stella    | stella@123456 |
+      | manny123  | Manny@123     |
 
   Scenario Outline: User login with valid username and invalid password
     Given I am on the login page

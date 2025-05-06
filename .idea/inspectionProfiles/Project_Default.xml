@@ -9,15 +9,33 @@
       <option name="ignoredModules">
         <list>
           <option value="PracticeTestingSite" />
+          <option value="PracticeTestingSite" />
+          <option value="PracticeTestingSite" />
+          <option value="PracticeTestingSite" />
+          <option value="PracticeTestingSite" />
+          <option value="PracticeTestingSite" />
+          <option value="PracticeTestingSite" />
         </list>
       </option>
       <option name="ignoredPackages">
         <list>
           <option value="com.fasterxml.jackson.core:jackson-databind:2.11.0" />
+          <option value="org.apache.pdfbox:pdfbox:2.0.22" />
+          <option value="org.apache.poi:poi-ooxml:5.3.0" />
+          <option value="com.google.guava:guava:28.2-android" />
+          <option value="com.fasterxml.jackson.core:jackson-databind:2.10.3" />
+          <option value="org.bouncycastle:bcprov-jdk18on:1.76" />
+          <option value="org.apache.commons:commons-compress:1.25.0" />
         </list>
       </option>
       <option name="ignoredReasons">
         <list>
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
+          <option value="Not exploitable" />
           <option value="Not exploitable" />
         </list>
       </option>

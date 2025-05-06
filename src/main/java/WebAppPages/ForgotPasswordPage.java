@@ -16,13 +16,13 @@ public class ForgotPasswordPage {
         PageFactory.initElements(driver, this);
     }
 
-    @FindBy(xpath = "//*[@id=\"examples\"]/div[1]/div[4]/div/div/h3/a")
+    @FindBy(linkText = "Forgot Password Form")
     private WebElement forgotPasswordPageButton;
 
     @FindBy(id = "email")
     private WebElement emailField;
 
-    @FindBy(xpath = "//*[@id=\"forgot_password\"]/button")
+    @FindBy(xpath = "//button[@type='submit']")
     private WebElement retrievePasswordButton;
 
     @FindBy(id = "confirmation-alert")
@@ -30,9 +30,9 @@ public class ForgotPasswordPage {
 
     public void scrollPage() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,350)");
+        js.executeScript("arguments[0].scrollIntoView(true);",forgotPasswordPageButton);
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -43,6 +43,21 @@ public class ForgotPasswordPage {
         if (!driver.getCurrentUrl().contains("forgot-password")) {
             JavascriptExecutor js = (JavascriptExecutor) driver;
             js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
+            js.executeScript("window.scrollBy(0,-400)");
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+
             forgotPasswordPageButton.click();
         }
     }
@@ -50,9 +65,10 @@ public class ForgotPasswordPage {
 
     public void enterEmailAddress(String email) {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0,75)");
+
+        js.executeScript("window.scrollBy(0,500)");
         try {
-            Thread.sleep(2000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
@@ -60,10 +76,29 @@ public class ForgotPasswordPage {
     }
 
     public void clickRetrievePasswordButton() {
-        retrievePasswordButton.click();
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        try {
+            Thread.sleep(2000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        js.executeScript("arguments[0].click()", retrievePasswordButton);
     }
 
     public String returnMessage() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("window.scrollBy(0,150)");
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
         return message.getText();
     }
 }

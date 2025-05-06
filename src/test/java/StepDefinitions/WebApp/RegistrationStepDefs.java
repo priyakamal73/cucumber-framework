@@ -14,13 +14,11 @@ public class RegistrationStepDefs {
 
     @Given("I am on the registration page")
     public void i_am_on_the_registration_page() {
-        registrationPage.scrollPage();
         registrationPage.clickRegisterPageLink();
     }
 
     @When("I enter a valid {string}, {string}, and {string}")
     public void i_enter_a_valid_and(String userName, String passWord, String confirmpassword) {
-        registrationPage.scrollPage();
         registrationPage.enterUsername(userName);
         registrationPage.enterPassword(passWord);
         registrationPage.enterConfirmPassword(confirmpassword);
@@ -45,7 +43,6 @@ public class RegistrationStepDefs {
 
     @When("I enter existing users {string}, {string}, and {string}")
     public void iEnterExistingUsersAnd(String userName, String passWord, String confirmpassword) {
-        registrationPage.scrollPage();
         registrationPage.enterUsername(userName);
         registrationPage.enterPassword(passWord);
         registrationPage.enterConfirmPassword(confirmpassword);

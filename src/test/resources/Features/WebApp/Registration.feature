@@ -1,4 +1,4 @@
-@WebApp
+@WebApp @Smoke @Regression
 Feature: User Registration
 
   As a new user
@@ -14,10 +14,10 @@ Feature: User Registration
     And I should be redirected to the login page
 
     Examples:
-      | username     | password         | confirm password |
-      | PtolemyPutin | ptolemyputin!123 | ptolemyputin!123 |
-      | NikomaTravis | nikomatravis!123 | nikomatravis!123 |
-      | Xenokram     | xenokram!123     | xenokram!123     |
+      | username   | password          | confirm password  |
+      | MarcoX101  | Napoli@2024!sole  | Napoli@2024!sole  |
+      | ElisaM909  | Firenze#2023*arte | Firenze#2023*arte |
+      | DavideZ456 | Genova*2025@mare  | Genova*2025@mare  |
 
   Scenario Outline: Invalid user registration with existing users
     Given I am on the registration page

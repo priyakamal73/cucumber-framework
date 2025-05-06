@@ -3,7 +3,10 @@ package WebAppPages;
 import org.openqa.selenium.*;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
+import java.time.Duration;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -52,7 +55,7 @@ public class OTPLoginPage {
     @FindBy(id = "flash")
     private WebElement message;
 
-    @FindBy(xpath = "/html/body/main/div[4]/div/a")
+    @FindBy(xpath = "//i[contains(text(), 'Logout')]")
     private WebElement logoutButton;
 
 
@@ -60,9 +63,9 @@ public class OTPLoginPage {
         JavascriptExecutor js = (JavascriptExecutor) driver;
         js.executeScript("window.open('https://temp-mail.io/en', '_blank');");
 
-        // Store the original window handle
+
         String originalWindow = driver.getWindowHandle();
-        // Switch to the new tab (second tab)
+
         for (String windowHandle : driver.getWindowHandles()) {
             if (!windowHandle.equals(originalWindow)) {
                 driver.switchTo().window(windowHandle);
@@ -70,18 +73,19 @@ public class OTPLoginPage {
             }
         }
         try {
-            Thread.sleep(6000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
 
         tempMailCopyButton.click();
+
         try {
-            Thread.sleep(3000);
+            Thread.sleep(5000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        // Switch back to the original tab
+
         driver.switchTo().window(originalWindow);
     }
 
@@ -110,21 +114,25 @@ public class OTPLoginPage {
 
     public String enterEmailAddress() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0, 400)");
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
-        }
-        emailField.click();
-        emailField.sendKeys(Keys.CONTROL + "V");
+        js.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        String email = emailField.getAttribute("value");
-        return email;
+
+        emailField.click();
+
+        emailField.sendKeys(Keys.CONTROL + "V");
+
+        try {
+            Thread.sleep(1000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        return emailField.getAttribute("value");
     }
 
     public void clickSendOTPCodeButton() {
@@ -142,7 +150,7 @@ public class OTPLoginPage {
         return otpMessage.getText();
     }
 
-    public int getOTPCodeFromEmail() {
+    public int getOTPCodeFromEmail()  {
         // Store the original window handle
         String originalWindow = driver.getWindowHandle();
         // Switch to the new tab (second tab)
@@ -157,7 +165,12 @@ public class OTPLoginPage {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
+
         tempMail.click();
+
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.visibilityOf(tempMailText));
+
         String text = tempMailText.getText();
         Pattern pattern = Pattern.compile("\\b\\d{6}\\b");
         Matcher matcher = pattern.matcher(text);
@@ -170,11 +183,26 @@ public class OTPLoginPage {
     }
 
     public void enterOTP(int otp) {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        if(driver.getCurrentUrl().contains("https://practice.expandtesting.com/#google_vignette")){
+
+            js.executeScript("document.querySelectorAll('ins.adsbygoogle, iframe').forEach(el => el.remove());");
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        js.executeScript("arguments[0].scrollIntoView(true);",otpCodeField);
         String OTP = String.valueOf(otp);
         otpCodeField.sendKeys(OTP);
     }
 
     public void clickVerifyOTPCodeButton() {
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].scrollIntoView(true);", verifyOtpCodeButton);
         verifyOtpCodeButton.click();
     }
 
@@ -188,7 +216,7 @@ public class OTPLoginPage {
 
     public void logout() {
         JavascriptExecutor js = (JavascriptExecutor) driver;
-        js.executeScript("window.scrollBy(0, 100)");
+        js.executeScript("window.scrollBy(0, 260)");
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e) {
