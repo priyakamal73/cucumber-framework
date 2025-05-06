@@ -57,8 +57,8 @@ PracticeTestingSite/
 │   │   ├── allure.properties       # Allure Report configuration
 │-- test-output-thread/             # Parallel execution reports
 │-- test-output/                    # Test output directory (TestNG reports, screenshots, logs)
-│   ├── allure-report/              # Screenshots of test failures
-│   ├── allure-results/             # Spark Extent Reports
+│   ├── allure-report/              # Allure report files
+│   ├── allure-results/             # Allure test results
 │-- .gitignore                      # Git ignore file
 │-- ApiDemos-debug.apk              # Sample APK for mobile testing
 │-- README.md                       # Project documentation
